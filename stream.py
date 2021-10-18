@@ -7,11 +7,11 @@ class Stream(Generic[T]):
     def __init__(self, list_pointer: List[T]):
         self._list_pointer = list_pointer
 
-    def map(self, func: Callable):
+    def map(self, func):
         self._list_pointer = map(func, self._list_pointer)
         return self
 
-    def filter(self, func: Callable):
+    def filter(self, func: Callable[[T], bool]):
         self._list_pointer = filter(func, self._list_pointer)
         return self
 
@@ -27,7 +27,7 @@ class Stream(Generic[T]):
     def count(self):
         return len(list(self._list_pointer))
 
-    def to_list(self) -> List:
+    def to_list(self):
         return list(self._list_pointer)
 
     def to_set(self) -> Set:
