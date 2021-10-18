@@ -23,4 +23,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python -m test
+        python -m pytest
