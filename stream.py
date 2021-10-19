@@ -11,7 +11,7 @@ class Stream(Generic[T]):
         self._list_pointer = map(func, self._list_pointer)
         return self
 
-    def filter(self, func: Callable[[Any, ...], bool]):
+    def filter(self, func: Callable[[Any], bool]):
         self._list_pointer = filter(func, self._list_pointer)
         return self
 
