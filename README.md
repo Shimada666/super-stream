@@ -19,4 +19,26 @@
 
 ### 使用
 
+### 与 java stream 的对照
+
+|  Java Stream  | Python Stream   |
+|---------------|-----------------|
+|    filter     |     filter      |
+|    map     |     map      |
+|    mapToInt       |     -      |
+|    mapToLong       |     -      |
+|    mapToDouble       |     -      |
+|    flatMap       |     -      |
+|    flatMapToInt       |     -      |
+|    flatMapToLong       |     -      |
+|    flatMapToDouble       |     -      |
+|    distinct       |     -      |
+|    sorted       |     sorted      |
+|    peek       |      -      |
+|    limit       |     limit      |
+|    skip       |     skip      |
+|    forEach       |     for_each      |
+|    reduce       |     -      |
+|    count       |     count      |
+
 ### FAQ

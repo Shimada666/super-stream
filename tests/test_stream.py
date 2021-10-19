@@ -29,6 +29,16 @@ class TestStream:
         b = Stream(a).count()
         assert b == 3
 
+    def test_limit(self):
+        a = [1, 2, 3]
+        b = Stream(a).limit(2).to_list()
+        assert b == [1, 2]
+
+    def test_skip(self):
+        a = [1, 2, 3]
+        b = Stream(a).skip(1).to_list()
+        assert b == [2, 3]
+
     def test_list(self):
         a = [1, 2, 3]
         b = Stream(a).count()

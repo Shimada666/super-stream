@@ -1,4 +1,5 @@
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterator
+from itertools import islice
 
 T = TypeVar('T')
 R = TypeVar('R')
@@ -23,11 +24,17 @@ class Stream(Generic[T]):
         for i in self._stream:
             func(i)
 
-    def sorted(self) -> 'Stream[T]':
-        return Stream(sorted(self._stream))
+    def sorted(self, key=None, reverse=False) -> 'Stream[T]':
+        return Stream(sorted(self._stream, key=key, reverse=reverse))
 
     def count(self) -> int:
         return len(list(self._stream))
+
+    def limit(self, max_size: int) -> 'Stream[T]':
+        return Stream(islice(self._stream, max_size))
+
+    def skip(self, n: int) -> 'Stream[T]':
+        return Stream(islice(self._stream, n, None))
 
     def to_list(self) -> List[T]:
         return list(self._stream)
@@ -37,3 +44,7 @@ class Stream(Generic[T]):
 
     def to_map(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
         return {k(i): v(i) for i in self._stream}
+
+
+if __name__ == '__main__':
+    print(Stream([1, 2, 3, 4, 5]).skip(0).to_list())
