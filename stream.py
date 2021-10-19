@@ -23,11 +23,6 @@ class Stream(Generic[T]):
         for i in self._stream:
             func(i)
 
-    def peek(self, func: Callable[[T], None]) -> 'Stream[T]':
-        for i in self._stream:
-            func(i)
-        return self
-
     def sorted(self) -> 'Stream[T]':
         return Stream(sorted(self._stream))
 
