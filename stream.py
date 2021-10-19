@@ -13,22 +13,22 @@ class Stream(Generic[T]):
         else:
             self._stream = iter([])
 
-    def map(self, func: Callable[[T], R]) -> 'Stream'[R]:
+    def map(self, func: Callable[[T], R]) -> 'Stream[R]':
         return Stream(map(func, self._stream))
 
-    def filter(self, func: Callable[[T], bool]) -> 'Stream'[T]:
+    def filter(self, func: Callable[[T], bool]) -> 'Stream[T]':
         return Stream(filter(func, self._stream))
 
     def for_each(self, func: Callable[[T], None]) -> None:
         for i in self._stream:
             func(i)
 
-    def peek(self, func: Callable[[T], None]) -> 'Stream'[T]:
+    def peek(self, func: Callable[[T], None]) -> 'Stream[T]':
         for i in self._stream:
             func(i)
         return self
 
-    def sorted(self) -> 'Stream'[T]:
+    def sorted(self) -> 'Stream[T]':
         return Stream(sorted(self._stream))
 
     def count(self) -> int:
