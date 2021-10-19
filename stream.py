@@ -1,4 +1,4 @@
-from typing import TypeVar, Callable, List, Set, Generic, Dict
+from typing import TypeVar, Callable, List, Set, Generic, Dict, Any
 
 T = TypeVar('T')
 
@@ -11,11 +11,15 @@ class Stream(Generic[T]):
         self._list_pointer = map(func, self._list_pointer)
         return self
 
-    def filter(self, func: Callable[[T], bool]):
+    def filter(self, func: Callable[[Any, ...], bool]):
         self._list_pointer = filter(func, self._list_pointer)
         return self
 
-    def for_each(self, func: Callable):
+    def for_each(self, func: Callable) -> None:
+        for i in self._list_pointer:
+            func(i)
+
+    def peek(self, func: Callable):
         for i in self._list_pointer:
             func(i)
         return self
