@@ -29,6 +29,13 @@ class TestStream:
         b = Stream(a).count()
         assert b == 3
 
+    def test_reduce(self):
+        a = [1, 2, 3]
+        b = Stream(a).reduce(lambda x, y: x + y)
+        assert b == 6
+        c = Stream(a).reduce(lambda x, y: x + y, 10)
+        assert c == 16
+
     def test_limit(self):
         a = [1, 2, 3]
         b = Stream(a).limit(2).to_list()

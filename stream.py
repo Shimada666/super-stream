@@ -1,3 +1,4 @@
+from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterator
 from itertools import islice
 
@@ -29,6 +30,12 @@ class Stream(Generic[T]):
 
     def count(self) -> int:
         return len(list(self._stream))
+
+    def reduce(self, func: Callable[[T, T], T], initial: T = None) -> 'T':
+        if initial:
+            return reduce(func, self._stream, initial)
+        else:
+            return reduce(func, self._stream)
 
     def limit(self, max_size: int) -> 'Stream[T]':
         return Stream(islice(self._stream, max_size))

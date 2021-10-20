@@ -21,24 +21,50 @@
 
 ### 与 java stream 的对照
 
-|  Java Stream  | Python Stream   |
-|---------------|-----------------|
-|    filter     |     filter      |
-|    map     |     map      |
-|    mapToInt       |     -      |
-|    mapToLong       |     -      |
-|    mapToDouble       |     -      |
-|    flatMap       |     -      |
-|    flatMapToInt       |     -      |
-|    flatMapToLong       |     -      |
-|    flatMapToDouble       |     -      |
-|    distinct       |     -      |
-|    sorted       |     sorted      |
-|    peek       |      -      |
-|    limit       |     limit      |
-|    skip       |     skip      |
-|    forEach       |     for_each      |
-|    reduce       |     -      |
-|    count       |     count      |
+* 暂不支持并行 parallel
+* 大部分功能已支持，行为相同
+
+#### 主要方法支持列表
+- [x] map
+- [x] forEach
+- [x] filter
+- [x] reduce
+- [x] sorted
+- [x] limit
+- [x] skip
+- [x] count
+- [ ] flatMap 正在施工中
+- [ ] findAny/findFirst 正在施工中
+- [ ] anyMatch/allMatch/noneMatch 正在施工中
+
+|  Java Stream  | Python Stream   |     备注      |
+|---------------|-----------------|-----------|
+|    filter     |     filter      |           |
+|    map     |     map      |   |           |
+|    mapToInt       |     -      |           |
+|    mapToLong       |     -      |           |
+|    mapToDouble       |     -      |           |
+|    flatMap       |     -      |           |
+|    flatMapToInt       |     -      |           |
+|    flatMapToLong       |     -      |           |
+|    flatMapToDouble       |     -      |           |
+|    distinct       |     -      |           |
+|    sorted       |     sorted      |           |
+|    peek       |      -      |    peek 在 java stream 多为调试功能， python stream 将不会实现，可用 map 并返回元素本身代替       |
+|    limit       |     limit      |           |
+|    skip       |     skip      |           |
+|    forEach       |     for_each      |           |
+|    reduce       |     reduce      |           |
+|    count       |     count      |           |
+|    min       |     -      |           |
+|    max       |     -      |           |
+|    findAny       |     -      |           |
+|    findFirst       |     -      |           |
+|    anyMatch       |     -      |           |
+|    noneMatch       |     -      |           |
+|    allMatch       |     -      |           |
+|    iterate       |     -      |    不常用，不会提供     |
+|    generate       |     -      |   不常用，不会提供        |
+|    concat       |     -      |    不常用，不会提供        |
 
 ### FAQ
