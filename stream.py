@@ -11,7 +11,7 @@ U = TypeVar('U')
 class Stream(Generic[T]):
     def __init__(self, stream: Iterator[T] = None):
         if stream:
-            self._stream = stream
+            self._stream = iter(stream)
         else:
             self._stream = iter([])
 
@@ -53,5 +53,3 @@ class Stream(Generic[T]):
         return {k(i): v(i) for i in self._stream}
 
 
-if __name__ == '__main__':
-    print(Stream([1, 2, 3, 4, 5]).skip(0).to_list())
