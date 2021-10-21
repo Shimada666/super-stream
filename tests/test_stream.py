@@ -1,4 +1,4 @@
-from stream import Stream
+from src.superstream import Stream
 
 
 class TestStream:
