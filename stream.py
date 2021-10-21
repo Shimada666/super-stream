@@ -78,7 +78,3 @@ class Stream(Generic[T]):
 
     def to_map(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
         return {k(i): v(i) for i in self._stream}
-
-
-if __name__ == '__main__':
-    print(Stream([1, 2, 5, 3, 5, 4]).distinct().to_list())
