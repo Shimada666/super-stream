@@ -1,6 +1,6 @@
 from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterator, Optional
-from itertools import islice
+from itertools import islice, chain
 
 T = TypeVar('T')
 R = TypeVar('R')
@@ -9,14 +9,21 @@ U = TypeVar('U')
 
 
 class Stream(Generic[T]):
-    def __init__(self, stream: Iterator[T] = None):
-        if stream:
-            self._stream = iter(stream)
-        else:
-            self._stream = iter([])
+    def __init__(self, stream: Iterator[T]):
+        self._stream = iter(stream)
+
+    def __iter__(self):
+        return self._stream
+
+    @staticmethod
+    def of(*args: T) -> 'Stream[T]':
+        return Stream(args)
 
     def map(self, func: Callable[[T], R]) -> 'Stream[R]':
         return Stream(map(func, self._stream))
+
+    def flat_map(self, func: Callable[[T], 'Stream[R]']) -> 'Stream[R]':
+        return Stream(chain.from_iterable(map(func, self._stream)))
 
     def filter(self, func: Callable[[T], bool]) -> 'Stream[T]':
         return Stream(filter(func, self._stream))

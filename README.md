@@ -35,9 +35,10 @@
 - [x] skip
 - [x] count
 - [x] distinct
-- [ ] flatMap 正在施工中
+- [x] flatMap
 - [x] findAny/findFirst
 - [x] anyMatch/allMatch/noneMatch
+- [x] of
 
 |  Java Stream  | Python Stream   |     备注      |
 |---------------|-----------------|-----------|
@@ -46,7 +47,7 @@
 |    mapToInt       |     -      |           |
 |    mapToLong       |     -      |           |
 |    mapToDouble       |     -      |           |
-|    flatMap       |     -      |           |
+|    flatMap       |     flat_map      |           |
 |    flatMapToInt       |     -      |           |
 |    flatMapToLong       |     -      |           |
 |    flatMapToDouble       |     -      |           |
@@ -65,6 +66,8 @@
 |    anyMatch       |     any_match      |           |
 |    noneMatch       |     none_match      |           |
 |    allMatch       |     all_match      |           |
+|    of       |     of      |          |
+|    empty       |     -      |   我在业务中没用过这个方法，如果有需要我会提供       |
 |    iterate       |     -      |    不常用，不会提供     |
 |    generate       |     -      |   不常用，不会提供        |
 |    concat       |     -      |    不常用，不会提供        |

@@ -3,12 +3,17 @@ from stream import Stream
 
 class TestStream:
     def test_init(self):
-        assert len(Stream().to_list()) == 0
+        assert len(Stream([]).to_list()) == 0
 
     def test_map(self):
         a = [1, 2, 3]
         b = Stream(a).map(lambda x: x * 2).to_list()
         assert b == [2, 4, 6]
+
+    def test_flat_map(self):
+        a = [[1, 2, 3], [4, 5, 6]]
+        b = Stream(a).flat_map(lambda x: Stream(x)).to_list()
+        assert b == [1, 2, 3, 4, 5, 6]
 
     def test_filter(self):
         a = [1, 2, 3]
@@ -92,3 +97,6 @@ class TestStream:
             '1': 1,
             '2': 2
         }
+
+    def test_of(self):
+        assert Stream.of(1, 2, 3).to_list() == [1, 2, 3]
