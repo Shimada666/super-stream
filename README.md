@@ -34,8 +34,8 @@
 - [x] skip
 - [x] count
 - [ ] flatMap 正在施工中
-- [ ] findAny/findFirst 正在施工中
-- [ ] anyMatch/allMatch/noneMatch 正在施工中
+- [x] findAny/findFirst
+- [x] anyMatch/allMatch/noneMatch
 
 |  Java Stream  | Python Stream   |     备注      |
 |---------------|-----------------|-----------|
@@ -58,11 +58,11 @@
 |    count       |     count      |           |
 |    min       |     -      |           |
 |    max       |     -      |           |
-|    findAny       |     -      |           |
-|    findFirst       |     -      |           |
-|    anyMatch       |     -      |           |
-|    noneMatch       |     -      |           |
-|    allMatch       |     -      |           |
+|    findAny       |     find_first      |      findAny 可用 findFirst 代替     |
+|    findFirst       |     find_first      |           |
+|    anyMatch       |     any_match      |           |
+|    noneMatch       |     none_match      |           |
+|    allMatch       |     all_match      |           |
 |    iterate       |     -      |    不常用，不会提供     |
 |    generate       |     -      |   不常用，不会提供        |
 |    concat       |     -      |    不常用，不会提供        |

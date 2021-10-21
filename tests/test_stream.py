@@ -46,6 +46,30 @@ class TestStream:
         b = Stream(a).skip(1).to_list()
         assert b == [2, 3]
 
+    def test_find_first(self):
+        a = [1, 2, 3]
+        b = Stream(a).find_first()
+        assert b == 1
+
+        a = []
+        b = Stream(a).find_first()
+        assert b is None
+
+    def test_any_match(self):
+        a = [1, 2, 3]
+        b = Stream(a).any_match(lambda x: x < 2)
+        assert b is True
+
+    def test_all_match(self):
+        a = [1, 2, 3]
+        b = Stream(a).all_match(lambda x: x < 4)
+        assert b is True
+
+    def test_none_match(self):
+        a = [1, 2, 3]
+        b = Stream(a).none_match(lambda x: x < 0)
+        assert b is True
+
     def test_list(self):
         a = [1, 2, 3]
         b = Stream(a).count()

@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterator
+from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterator, Optional
 from itertools import islice
 
 T = TypeVar('T')
@@ -43,6 +43,30 @@ class Stream(Generic[T]):
     def skip(self, n: int) -> 'Stream[T]':
         return Stream(islice(self._stream, n, None))
 
+    def find_first(self) -> Optional[T]:
+        try:
+            return next(self._stream)
+        except StopIteration:
+            return None
+
+    def any_match(self, func: Callable[[T], bool]) -> bool:
+        """
+        this is equivalent to
+            for i in self._stream:
+                if func(i):
+                    return True
+            return False
+        :param func:
+        :return:
+        """
+        return any(map(func, self._stream))
+
+    def all_match(self, func: Callable[[T], bool]) -> bool:
+        return all(map(func, self._stream))
+
+    def none_match(self, func: Callable[[T], bool]) -> bool:
+        return not self.any_match(func)
+
     def to_list(self) -> List[T]:
         return list(self._stream)
 
@@ -51,5 +75,3 @@ class Stream(Generic[T]):
 
     def to_map(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
         return {k(i): v(i) for i in self._stream}
-
-
