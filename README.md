@@ -33,6 +33,7 @@
 - [x] limit
 - [x] skip
 - [x] count
+- [x] distinct
 - [ ] flatMap 正在施工中
 - [x] findAny/findFirst
 - [x] anyMatch/allMatch/noneMatch
@@ -48,7 +49,7 @@
 |    flatMapToInt       |     -      |           |
 |    flatMapToLong       |     -      |           |
 |    flatMapToDouble       |     -      |           |
-|    distinct       |     -      |           |
+|    distinct       |     distinct      |           |
 |    sorted       |     sorted      |           |
 |    peek       |      -      |    peek 在 java stream 多为调试功能， python stream 将不会实现，可用 map 并返回元素本身代替       |
 |    limit       |     limit      |           |

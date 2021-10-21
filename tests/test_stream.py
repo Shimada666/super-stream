@@ -19,6 +19,11 @@ class TestStream:
         a = [1, 2, 3]
         Stream(a).for_each(lambda x: x)
 
+    def test_distinct(self):
+        a = [1, 2, 5, 3, 5, 4]
+        b = Stream(a).distinct().to_list()
+        assert b == [1, 2, 5, 3, 4]
+
     def test_sorted(self):
         a = [2, 1, 3]
         b = Stream(a).sorted().to_list()
