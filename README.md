@@ -1,8 +1,10 @@
 # SuperStream
 
 [![Test](https://github.com/Shimada666/super-stream/actions/workflows/main.yml/badge.svg)](https://github.com/Shimada666/super-stream/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/Shimada666/super-stream/branch/master/graph/badge.svg)](https://codecov.io/gh/Shimada666/super-stream)
+[![codecov](https://codecov.io/gh/Shimada666/python-stream/branch/master/graph/badge.svg)](https://codecov.io/gh/Shimada666/super-stream)
 [![Python 3.6+](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+[![image](https://img.shields.io/pypi/v/superstream.svg?style=flat)](https://pypi.python.org/pypi/superstream)
 
 在用使用过 Typescript 与 Java 方便的链式调用后，回到 Python 再想实现同样的功能  
 高阶函数的套娃让你很痛苦吧？  
