@@ -36,6 +36,7 @@
 - [x] limit
 - [x] skip
 - [x] count
+- [x] min/max
 - [x] distinct
 - [x] flatMap
 - [x] findAny/findFirst
@@ -61,8 +62,8 @@
 |    forEach       |     for_each      |           |
 |    reduce       |     reduce      |           |
 |    count       |     count      |           |
-|    min       |     -      |           |
-|    max       |     -      |           |
+|    min       |     min      |           |
+|    max       |     max      |           |
 |    findAny       |     find_first      |      findAny 可用 findFirst 代替     |
 |    findFirst       |     find_first      |           |
 |    anyMatch       |     any_match      |           |

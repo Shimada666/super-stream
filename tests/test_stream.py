@@ -1,4 +1,4 @@
-from src.superstream import Stream
+from src.superstream.stream import Stream
 
 
 class TestStream:
@@ -55,6 +55,18 @@ class TestStream:
         a = [1, 2, 3]
         b = Stream(a).skip(1).to_list()
         assert b == [2, 3]
+
+    def test_min(self):
+        a = [{'a': 1}, {'a': 2}]
+        b = Stream(a).min(key=lambda x: x['a'])
+        assert b == {'a': 1}
+        assert Stream([1, 2]).min() == 1
+
+    def test_max(self):
+        a = [{'a': 1}, {'a': 2}]
+        b = Stream(a).max(key=lambda x: x['a'])
+        assert b == {'a': 2}
+        assert Stream([1, 2]).max() == 2
 
     def test_find_first(self):
         a = [1, 2, 3]
