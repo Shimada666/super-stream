@@ -1,5 +1,5 @@
 from functools import reduce
-from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterator, Optional, Any
+from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterable, Optional, Any
 from itertools import islice, chain
 
 T = TypeVar('T')
@@ -9,7 +9,7 @@ U = TypeVar('U')
 
 
 class Stream(Generic[T]):
-    def __init__(self, stream: Iterator[T]):
+    def __init__(self, stream: Iterable[T]):
         self._stream = iter(stream)
 
     def __iter__(self):

@@ -47,7 +47,7 @@
 |---------------|-----------------|-----------|
 |    filter     |     filter      |           |
 |    map     |     map      |   |           |
-|    mapToInt       |     -      |           |
+|    mapToInt       |     -      |   不提供        |
 |    mapToLong       |     -      |           |
 |    mapToDouble       |     -      |           |
 |    flatMap       |     flat_map      |           |
