@@ -42,18 +42,17 @@
 - [x] findAny/findFirst
 - [x] anyMatch/allMatch/noneMatch
 - [x] of
+- [x] collect(toList/toSet/toMap/groupingBy)
 
 |  Java Stream  | Python Stream   |     备注      |
 |---------------|-----------------|-----------|
 |    filter     |     filter      |           |
 |    map     |     map      |   |           |
-|    mapToInt       |     -      |   不提供        |
-|    mapToLong       |     -      |           |
-|    mapToDouble       |     -      |           |
 |    flatMap       |     flat_map      |           |
-|    flatMapToInt       |     -      |           |
-|    flatMapToLong       |     -      |           |
-|    flatMapToDouble       |     -      |           |
+|    collect(groupingBy)       |     group_by      |           |
+|    collect(toList)       |     to_list      |           |
+|    collect(toSet)       |     to_set      |           |
+|    collect(toMap)       |     to_map      |           |
 |    distinct       |     distinct      |           |
 |    sorted       |     sorted      |           |
 |    peek       |      -      |    peek 在 java stream 多为调试功能， python stream 将不会实现，可用 map 并返回元素本身代替       |
@@ -74,5 +73,11 @@
 |    iterate       |     -      |    不常用，不会提供     |
 |    generate       |     -      |   不常用，不会提供        |
 |    concat       |     -      |    不常用，不会提供        |
+|    mapToInt       |     -      |   不提供        |
+|    mapToLong       |     -      |   不提供        |
+|    mapToDouble       |     -      |   不提供        |
+|    flatMapToInt       |     -      |    不提供       |
+|    flatMapToLong       |     -      |    不提供       |
+|    flatMapToDouble       |     -      |   不提供        |
 
 ### FAQ
