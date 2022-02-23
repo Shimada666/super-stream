@@ -39,6 +39,16 @@ class TestStream:
         b = Stream(a).count()
         assert b == 3
 
+    def test_sum(self):
+        a = [1, 2, 3]
+        b = Stream(a).sum()
+        assert b == 6
+
+    def test_group_by(self):
+        a = [{'p': '1', 'name': 'foo'}, {'p': '2', 'name': 'bar'}, {'p': '2', 'name': 'bar'}]
+        b = Stream(a).group_by(lambda x: x['p'])
+        assert len(b['2']) == 2
+
     def test_reduce(self):
         a = [1, 2, 3]
         b = Stream(a).reduce(lambda x, y: x + y)

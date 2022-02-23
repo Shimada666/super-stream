@@ -41,6 +41,15 @@ class Stream(Generic[T]):
     def count(self) -> int:
         return len(list(self._stream))
 
+    def sum(self) -> 'T':
+        return sum(self._stream)
+
+    def group_by(self, classifier: Callable[[T], K]) -> Dict[K, List[T]]:
+        groups = {}
+        for i in self._stream:
+            groups.setdefault(classifier(i), []).append(i)
+        return groups
+
     def reduce(self, func: Callable[[T, T], T], initial: T = None) -> 'T':
         if initial:
             return reduce(func, self._stream, initial)
