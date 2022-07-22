@@ -18,7 +18,14 @@
 
 ### 安装
 
-直接复制 stream.py 里的代码，将来完善后上 pypi 可以使用 pip 安装，但现在还不支持
+**方式一**
+```shell
+pip install superstream
+```
+
+**方式二**
+
+直接复制 stream.py 代码到你工具库里
 
 ### 使用
 
