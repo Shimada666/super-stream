@@ -23,6 +23,7 @@ pip install superstream
 ```
 
 ## 使用
+[查看文档](https://shimada666.github.io/super-stream/) 
 
 ### 与 java stream 的对照
 

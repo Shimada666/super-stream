@@ -1,0 +1,25 @@
+{
+  "name": "docs-template",
+  "author": "Shimada666",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build --base=/super-stream/",
+    "docs:deploy": "pnpm build && gh-pages -d .vitepress/dist"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^4.0.0",
+    "vitepress": "1.0.0-alpha.9",
+    "vue": "^3.2.33"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "react",
+        "react-dom",
+        "@types/react"
+      ]
+    }
+  }
+}
