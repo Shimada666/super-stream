@@ -3,7 +3,7 @@ name: Docs
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   build-deploy:
@@ -13,11 +13,4 @@ jobs:
       - uses: pnpm/action-setup@v2.1.0
         with:
           version: 7.9.0
-      - run: cd docs && pnpm i && pnpm build
-
-      - name: Deploy Docs
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: docs/.vitepress/dist
+      - run: cd docs && pnpm i && pnpm build && echo .vitepress/dist/api/all_match.html
