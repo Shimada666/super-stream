@@ -10,7 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.1.0
-        with:
-          version: 7.9.0
       - run: git log -1 --format=%at setup.py
