@@ -17,9 +17,4 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
 
-      - name: Install Deps
-        working-directory: ./docs
-        run: |
-          pnpm i
-          pnpm build
-          cat .vitepress/dist/api/all_match.html
+      - run: git log -1 --format=%at docs/package.json
