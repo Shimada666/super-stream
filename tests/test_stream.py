@@ -56,6 +56,10 @@ class TestStream:
         c = Stream(a).reduce(lambda x, y: x + y, 10)
         assert c == 16
 
+        a = []
+        d = Stream(a).reduce(lambda x, y: x + y)
+        assert d is None
+
     def test_limit(self):
         a = [1, 2, 3]
         b = Stream(a).limit(2).to_list()
@@ -102,9 +106,9 @@ class TestStream:
         b = Stream(a).none_match(lambda x: x < 0)
         assert b is True
 
-    def test_list(self):
+    def test_to_list(self):
         a = [1, 2, 3]
-        b = Stream(a).count()
+        b = len(Stream(a).to_list())
         assert b == 3
 
     def test_set(self):

@@ -50,11 +50,14 @@ class Stream(Generic[T]):
             groups.setdefault(classifier(i), []).append(i)
         return groups
 
-    def reduce(self, func: Callable[[T, T], T], initial: T = None) -> 'T':
+    def reduce(self, func: Callable[[T, T], T], initial: T = None) -> Optional[T]:
         if initial:
             return reduce(func, self._stream, initial)
         else:
-            return reduce(func, self._stream)
+            try:
+                return reduce(func, self._stream)
+            except TypeError:
+                return None
 
     def limit(self, max_size: int) -> 'Stream[T]':
         return Stream(islice(self._stream, max_size))
