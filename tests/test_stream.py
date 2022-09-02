@@ -60,6 +60,9 @@ class TestStream:
         d = Stream(a).reduce(lambda x, y: x + y)
         assert d is None
 
+        e = Stream(a).reduce(lambda x, y: x + y, 0)
+        assert e == 0
+
     def test_limit(self):
         a = [1, 2, 3]
         b = Stream(a).limit(2).to_list()
