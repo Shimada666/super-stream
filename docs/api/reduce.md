@@ -5,7 +5,7 @@
 ## Source
 ```python
 def reduce(self, func: Callable[[T, T], T], initial: T = None) -> Optional[T]:
-    if initial:
+    if initial is not None:
         return reduce(func, self._stream, initial)
     else:
         try:
