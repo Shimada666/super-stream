@@ -57,7 +57,8 @@ pip install superstream
 | collect(groupingBy) | group_by      |                                                                                          |
 | collect(toList)     | to_list       |                                                                                          |
 | collect(toSet)      | to_set        |                                                                                          |
-| collect(toMap)      | to_map        |                                                                                          |
+| collect(toMap)      | to_dict       |                                                                                          |
+| collect(toMap)      | to_map        | to_dict 的别名，保持与 Java 的一致                                                       |
 | distinct            | distinct      |                                                                                          |
 | sorted              | sorted        |                                                                                          |
 | peek                | -             | peek 在 java stream 多为调试功能， python stream 将不会实现，可用 map 并返回元素本身代替 |

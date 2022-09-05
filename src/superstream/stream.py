@@ -116,5 +116,8 @@ class Stream(Generic[T]):
     def to_set(self) -> Set[T]:
         return set(self._stream)
 
-    def to_map(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
+    def to_dict(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
         return {k(i): v(i) for i in self._stream}
+
+    def to_map(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
+        return self.to_dict(k, v)
