@@ -54,6 +54,7 @@ pip install superstream
 | filter              | filter        |                                                                                          |
 | map                 | map           |                                                                                          |
 | flatMap             | flat_map      |                                                                                          |
+| collect             | collect       |                                                                                          |
 | collect(groupingBy) | group_by      |                                                                                          |
 | collect(toList)     | to_list       |                                                                                          |
 | collect(toSet)      | to_set        |                                                                                          |

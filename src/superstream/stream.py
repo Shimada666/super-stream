@@ -121,3 +121,6 @@ class Stream(Generic[T]):
 
     def to_map(self, k: Callable[[T], K], v: Callable[[T], U]) -> Dict[K, U]:
         return self.to_dict(k, v)
+
+    def collect(self, func: Callable[[Iterable[T]], R]) -> R:
+        return func(self._stream)
