@@ -1,6 +1,7 @@
 from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterable, Optional, Any
-from itertools import islice, chain
+from itertools import islice, chain, count
+from collections import deque
 
 T = TypeVar('T')
 R = TypeVar('R')
@@ -39,7 +40,9 @@ class Stream(Generic[T]):
         return Stream(sorted(self._stream, key=key, reverse=reverse))
 
     def count(self) -> int:
-        return len(list(self._stream))
+        cnt = count()
+        deque(zip(self._stream, cnt), maxlen=0)
+        return next(cnt)
 
     def sum(self) -> 'T':
         return sum(self._stream)
