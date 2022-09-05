@@ -119,6 +119,14 @@ class TestStream:
         b = Stream(a).to_set()
         assert len(b) == 3
 
+    def test_to_dict(self):
+        a = [1, 2]
+        b = Stream(a).to_dict(lambda x: str(x), lambda y: y)
+        assert b == {
+            '1': 1,
+            '2': 2
+        }
+
     def test_to_map(self):
         a = [1, 2]
         b = Stream(a).to_map(lambda x: str(x), lambda y: y)
