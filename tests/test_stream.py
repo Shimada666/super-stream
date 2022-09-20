@@ -137,3 +137,8 @@ class TestStream:
 
     def test_of(self):
         assert Stream.of(1, 2, 3).to_list() == [1, 2, 3]
+
+    def test_collect(self):
+        a = [1, 2, 3]
+        b = Stream(a).collect(set)
+        assert b == {1, 2, 3}
