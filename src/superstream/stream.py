@@ -75,19 +75,23 @@ class Stream(Generic[T]):
     def skip(self, n: int) -> 'Stream[T]':
         return Stream(islice(self._stream, n, None))
 
-    def min(self, key: Callable[[T], Any] = lambda x: x, default: T = None) -> Optional[T]:
+    def min(self, key: Callable[[T], Any] = None, default: T = None) -> Optional[T]:
         """
         :param default: use default value when stream is empty
         :param key: at lease supported __lt__ method
         """
-        return min(self._stream, key=key, default=default)
+        if key is not None:
+            return min(self._stream, key=key, default=default)
+        return min(self._stream, default=default)
 
-    def max(self, key: Callable[[T], Any] = lambda x: x, default: T = None) -> Optional[T]:
+    def max(self, key: Callable[[T], Any] = None, default: T = None) -> Optional[T]:
         """
         :param default: use default value when stream is empty
         :param key: at lease supported __lt__ method
         """
-        return max(self._stream, key=key, default=default)
+        if key is not None:
+            return max(self._stream, key=key, default=default)
+        return max(self._stream, default=default)
 
     def find_first(self) -> Optional[T]:
         try:
