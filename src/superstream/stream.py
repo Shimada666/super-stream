@@ -2,7 +2,6 @@ from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterable, Optional, Any
 from itertools import islice, chain, count
 from collections import deque
-from src.superstream.util import identity
 
 T = TypeVar('T')
 R = TypeVar('R')
@@ -69,14 +68,14 @@ class Stream(Generic[T]):
     def skip(self, n: int) -> 'Stream[T]':
         return Stream(islice(self._stream, n, None))
 
-    def min(self, key: Callable[[T], Any] = identity, default: T = None) -> Optional[T]:
+    def min(self, key: Callable[[T], Any] = lambda x: x, default: T = None) -> Optional[T]:
         """
         :param default: use default value when stream is empty
         :param key: at lease supported __lt__ method
         """
         return min(self._stream, key=key, default=default)
 
-    def max(self, key: Callable[[T], Any] = identity, default: T = None) -> Optional[T]:
+    def max(self, key: Callable[[T], Any] = lambda x: x, default: T = None) -> Optional[T]:
         """
         :param default: use default value when stream is empty
         :param key: at lease supported __lt__ method
