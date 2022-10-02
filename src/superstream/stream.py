@@ -59,8 +59,11 @@ class Stream(Generic[T]):
         else:
             try:
                 return reduce(func, self._stream)
-            except TypeError:
-                return None
+            except TypeError as e:
+                if "reduce() of empty" in e.args[0]:
+                    return None
+                else:
+                    raise
 
     def limit(self, max_size: int) -> 'Stream[T]':
         return Stream(islice(self._stream, max_size))
