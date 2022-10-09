@@ -8,6 +8,7 @@ R = TypeVar('R')
 K = TypeVar('K')
 U = TypeVar('U')
 
+_initial_missing = object()
 
 class Stream(Generic[T]):
     def __init__(self, stream: Iterable[T]):
@@ -53,8 +54,8 @@ class Stream(Generic[T]):
             groups.setdefault(classifier(i), []).append(i)
         return groups
 
-    def reduce(self, func: Callable[[T, T], T], initial: T = None) -> Optional[T]:
-        if initial is not None:
+    def reduce(self, func: Callable[[T, T], T], initial: T = _initial_missing) -> Optional[T]:
+        if initial is not _initial_missing:
             return reduce(func, self._stream, initial)
         else:
             try:
