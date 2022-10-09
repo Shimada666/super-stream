@@ -1,6 +1,6 @@
 from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterable, Optional, Any
-from itertools import islice, chain, count
+from itertools import islice, chain, count, starmap
 from collections import deque
 
 T = TypeVar('T')
@@ -22,6 +22,9 @@ class Stream(Generic[T]):
 
     def map(self, func: Callable[[T], R]) -> 'Stream[R]':
         return Stream(map(func, self._stream))
+
+    def starmap(self, func: Callable[..., R]) -> 'Stream[R]':
+        return Stream(starmap(func, self._stream))
 
     def flat_map(self, func: Callable[[T], 'Stream[R]']) -> 'Stream[R]':
         return Stream(chain.from_iterable(map(func, self._stream)))

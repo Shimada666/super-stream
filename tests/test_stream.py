@@ -10,6 +10,11 @@ class TestStream:
         b = Stream(a).map(lambda x: x * 2).to_list()
         assert b == [2, 4, 6]
 
+    def test_starmap(self):
+        a = [(2,5), (3,2), (10,3)]
+        b = Stream(a).starmap(pow).to_list()
+        assert b == [32, 9, 1000]
+
     def test_flat_map(self):
         a = [[1, 2, 3], [4, 5, 6]]
         b = Stream(a).flat_map(lambda x: Stream(x)).to_list()
