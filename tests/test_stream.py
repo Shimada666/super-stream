@@ -49,6 +49,10 @@ class TestStream:
         b = Stream(a).sum()
         assert b == 6
 
+        a = [[1], [2, 3], [4]]
+        b = Stream(a).sum(start = [0])
+        assert b == [0, 1, 2, 3, 4]
+
     def test_group_by(self):
         a = [{'p': '1', 'name': 'foo'}, {'p': '2', 'name': 'bar'}, {'p': '2', 'name': 'bar'}]
         b = Stream(a).group_by(lambda x: x['p'])
