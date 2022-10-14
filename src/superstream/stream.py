@@ -48,8 +48,8 @@ class Stream(Generic[T]):
         deque(zip(self._stream, cnt), maxlen=0)
         return next(cnt)
 
-    def sum(self) -> 'T':
-        return sum(self._stream)
+    def sum(self, start: T = 0) -> T:
+        return sum(self._stream, start)
 
     def group_by(self, classifier: Callable[[T], K]) -> Dict[K, List[T]]:
         groups = {}
