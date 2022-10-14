@@ -151,3 +151,8 @@ class TestStream:
         a = [1, 2, 3]
         b = Stream(a).collect(set)
         assert b == {1, 2, 3}
+
+    def test_collects(self):
+        a = [1, 2, 3]
+        b = Stream(a).collects(enumerate).filter(lambda x: x[1] % 2 != 0).map(lambda x: x[0]).to_list()
+        assert b == [0, 2]
