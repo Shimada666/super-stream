@@ -94,10 +94,7 @@ class Stream(Generic[T]):
         return max(self._stream, default=default)
 
     def find_first(self) -> Optional[T]:
-        try:
-            return next(self._stream)
-        except StopIteration:
-            return None
+        return next(self._stream, None)
 
     def any_match(self, func: Callable[[T], bool]) -> bool:
         """
