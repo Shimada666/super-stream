@@ -56,6 +56,7 @@ pip install superstream
 | -                   | starmap       | map 的 \* 参数解包版本                                                                   |
 | flatMap             | flat_map      |                                                                                          |
 | collect             | collect       |                                                                                          |
+| -                   | collects      | collect 对应的中间操作，collects(collector) 相当于 Java 中的 collect(collector).stream() |
 | collect(groupingBy) | group_by      |                                                                                          |
 | collect(toList)     | to_list       |                                                                                          |
 | collect(toSet)      | to_set        |                                                                                          |

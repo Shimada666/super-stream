@@ -131,3 +131,6 @@ class Stream(Generic[T]):
 
     def collect(self, func: Callable[[Iterable[T]], R]) -> R:
         return func(self._stream)
+
+    def collects(self, func: Callable[[Iterable[T]], Iterable[R]]) -> 'Stream[R]':
+        return Stream(func(self._stream))
