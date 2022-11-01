@@ -1,6 +1,6 @@
 from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterable, Optional, Any
-from itertools import islice, chain, count, starmap
+from itertools import islice, chain, count, starmap, takewhile, dropwhile
 from collections import deque
 
 T = TypeVar('T')
@@ -74,6 +74,12 @@ class Stream(Generic[T]):
 
     def skip(self, n: int) -> 'Stream[T]':
         return Stream(islice(self._stream, n, None))
+
+    def take_while(self, pred: Callable[[T], bool]) -> 'Stream[T]':
+        return Stream(takewhile(pred, self._stream))
+
+    def drop_while(self, pred: Callable[[T], bool]) -> 'Stream[T]':
+        return Stream(dropwhile(pred, self._stream))
 
     def min(self, key: Callable[[T], Any] = None, default: T = None) -> Optional[T]:
         """

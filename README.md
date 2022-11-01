@@ -67,6 +67,8 @@ pip install superstream
 | peek                | -             | peek 在 java stream 多为调试功能， python stream 将不会实现，可用 map 并返回元素本身代替 |
 | limit               | limit         |                                                                                          |
 | skip                | skip          |                                                                                          |
+| takeWhile           | take_while    |                                                                                          |
+| dropWhile           | drop_while    |                                                                                          |
 | forEach             | for_each      |                                                                                          |
 | reduce              | reduce        |                                                                                          |
 | count               | count         |                                                                                          |
