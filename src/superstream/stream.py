@@ -38,8 +38,17 @@ class Stream(Generic[T]):
     def of(*args: T) -> 'Stream[T]':
         return Stream(args)
 
-    def map(self, func: Callable[[T], R]) -> 'Stream[R]':
-        return Stream(map(func, self._stream))
+    def map(self, func: Callable[[T], R], pool_map=None) -> 'Stream[R]':
+        """
+        :param pool_map: a map method of a multiple processing pool
+            for example:
+                multiprocessing.Pool.map
+                multiprocessing.dummy.Pool.imap
+                multiprocess.Pool.map_async
+                pathos.multiprocessing.ProcessPool.uimap
+        """
+        map_method = pool_map or map
+        return Stream(map_method(func, self._stream))
 
     def star_map(self, func: Callable[..., R]) -> 'Stream[R]':
         return Stream(starmap(func, self._stream))
