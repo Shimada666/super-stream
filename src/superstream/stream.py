@@ -34,8 +34,7 @@ class Stream(Generic[T]):
         return Stream(filter(func, self._stream))
 
     def for_each(self, func: Callable[[T], None]) -> None:
-        for i in self._stream:
-            func(i)
+        deque(map(func, self._stream), maxlen=0)
 
     def peek(self, func: Callable[[T], None]) -> 'Stream[T]':
         for i in self._stream:
