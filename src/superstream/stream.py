@@ -10,6 +10,23 @@ U = TypeVar('U')
 
 _initial_missing = object()
 
+def unique_everseen(iterable, key=None):
+    seenset = set()
+    seenset_add = seenset.add
+    seenlist = []
+    seenlist_add = seenlist.append
+    use_key = key is not None
+    for element in iterable:
+        k = key(element) if use_key else element
+        try:
+            if k not in seenset:
+                seenset_add(k)
+                yield element
+        except TypeError:
+            if k not in seenlist:
+                seenlist_add(k)
+                yield element
+
 class Stream(Generic[T]):
     def __init__(self, stream: Iterable[T]):
         self._stream = iter(stream)
@@ -41,8 +58,8 @@ class Stream(Generic[T]):
             func(i)
             yield i
 
-    def distinct(self):
-        return Stream(list(dict.fromkeys(self._stream)))
+    def distinct(self, key: Callable[[T], K] = None) -> 'Stream[T]':
+        return Stream(unique_everseen(self._stream, key))
 
     def sorted(self, key=None, reverse=False) -> 'Stream[T]':
         return Stream(sorted(self._stream, key=key, reverse=reverse))
