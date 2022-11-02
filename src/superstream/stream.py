@@ -57,9 +57,8 @@ class Stream(Generic[T]):
 
     def group_by(self, classifier: Callable[[T], K]) -> Dict[K, List[T]]:
         groups = {}
-        def _classify(i):
+        for i in self._stream:
             groups.setdefault(classifier(i), []).append(i)
-        deque(map(_classify, self._stream), maxlen=0)
         return groups
 
     def reduce(self, func: Callable[[T, T], T], initial: T = _initial_missing) -> Optional[T]:
