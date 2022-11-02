@@ -64,7 +64,7 @@ pip install superstream
 | collect(toMap)      | to_map        | to_dict 的别名，保持与 Java 的一致                                                       |
 | distinct            | distinct      |                                                                                          |
 | sorted              | sorted        |                                                                                          |
-| peek                | -             | peek 在 java stream 多为调试功能， python stream 将不会实现，可用 map 并返回元素本身代替 |
+| peek                | peek          |                                                                                          |
 | limit               | limit         |                                                                                          |
 | skip                | skip          |                                                                                          |
 | takeWhile           | take_while    |                                                                                          |

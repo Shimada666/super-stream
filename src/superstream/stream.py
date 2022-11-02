@@ -37,6 +37,11 @@ class Stream(Generic[T]):
         for i in self._stream:
             func(i)
 
+    def peek(self, func: Callable[[T], None]) -> 'Stream[T]':
+        for i in self._stream:
+            func(i)
+            yield i
+
     def distinct(self):
         return Stream(list(dict.fromkeys(self._stream)))
 
