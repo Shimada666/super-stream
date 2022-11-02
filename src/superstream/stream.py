@@ -167,3 +167,15 @@ class Stream(Generic[T]):
 
     def collects(self, func: Callable[[Iterable[T]], Iterable[R]]) -> 'Stream[R]':
         return Stream(func(self._stream))
+
+    def zip_by(self, *iterables: Iterable[Any]) -> 'Stream[(T, *Any)]':
+        return Stream(zip(*iterables, self._stream))
+
+    def zip_with(self, *iterables: Iterable[Any]) -> 'Stream[(T, *Any)]':
+        return Stream(zip(self._stream, *iterables))
+
+    def concat_by(self, iterables: Iterable[T]) -> 'Stream[T]':
+        return Stream(chain(iterables, self._stream))
+
+    def concat_with(self, iterables: Iterable[T]) -> 'Stream[T]':
+        return Stream(chain(self._stream, iterables))
