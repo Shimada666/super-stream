@@ -24,7 +24,7 @@ class Stream(Generic[T]):
     def map(self, func: Callable[[T], R]) -> 'Stream[R]':
         return Stream(map(func, self._stream))
 
-    def starmap(self, func: Callable[..., R]) -> 'Stream[R]':
+    def star_map(self, func: Callable[..., R]) -> 'Stream[R]':
         return Stream(starmap(func, self._stream))
 
     def flat_map(self, func: Callable[[T], 'Stream[R]']) -> 'Stream[R]':
