@@ -1,6 +1,6 @@
 from functools import reduce
 from typing import TypeVar, Callable, List, Set, Generic, Dict, Iterable, Optional, Any
-from itertools import islice, chain, count, starmap
+from itertools import islice, chain, count, starmap, takewhile, dropwhile
 from collections import deque
 
 T = TypeVar('T')
@@ -9,6 +9,23 @@ K = TypeVar('K')
 U = TypeVar('U')
 
 _initial_missing = object()
+
+def unique_everseen(iterable, key=None):
+    seenset = set()
+    seenset_add = seenset.add
+    seenlist = []
+    seenlist_add = seenlist.append
+    use_key = key is not None
+    for element in iterable:
+        k = key(element) if use_key else element
+        try:
+            if k not in seenset:
+                seenset_add(k)
+                yield element
+        except TypeError:
+            if k not in seenlist:
+                seenlist_add(k)
+                yield element
 
 class Stream(Generic[T]):
     def __init__(self, stream: Iterable[T]):
@@ -21,8 +38,17 @@ class Stream(Generic[T]):
     def of(*args: T) -> 'Stream[T]':
         return Stream(args)
 
-    def map(self, func: Callable[[T], R]) -> 'Stream[R]':
-        return Stream(map(func, self._stream))
+    def map(self, func: Callable[[T], R], pool_map=None) -> 'Stream[R]':
+        """
+        :param pool_map: a map method of a multiple processing pool
+            for example:
+                multiprocessing.Pool.map
+                multiprocessing.dummy.Pool.imap
+                multiprocess.Pool.map_async
+                pathos.multiprocessing.ProcessPool.uimap
+        """
+        map_method = pool_map or map
+        return Stream(map_method(func, self._stream))
 
     def star_map(self, func: Callable[..., R]) -> 'Stream[R]':
         return Stream(starmap(func, self._stream))
@@ -34,11 +60,15 @@ class Stream(Generic[T]):
         return Stream(filter(func, self._stream))
 
     def for_each(self, func: Callable[[T], None]) -> None:
+        deque(map(func, self._stream), maxlen=0)
+
+    def peek(self, func: Callable[[T], None]) -> 'Stream[T]':
         for i in self._stream:
             func(i)
+            yield i
 
-    def distinct(self):
-        return Stream(list(dict.fromkeys(self._stream)))
+    def distinct(self, key: Callable[[T], K] = None) -> 'Stream[T]':
+        return Stream(unique_everseen(self._stream, key))
 
     def sorted(self, key=None, reverse=False) -> 'Stream[T]':
         return Stream(sorted(self._stream, key=key, reverse=reverse))
@@ -74,6 +104,12 @@ class Stream(Generic[T]):
 
     def skip(self, n: int) -> 'Stream[T]':
         return Stream(islice(self._stream, n, None))
+
+    def take_while(self, pred: Callable[[T], bool]) -> 'Stream[T]':
+        return Stream(takewhile(pred, self._stream))
+
+    def drop_while(self, pred: Callable[[T], bool]) -> 'Stream[T]':
+        return Stream(dropwhile(pred, self._stream))
 
     def min(self, key: Callable[[T], Any] = None, default: T = None) -> Optional[T]:
         """
@@ -131,3 +167,15 @@ class Stream(Generic[T]):
 
     def collects(self, func: Callable[[Iterable[T]], Iterable[R]]) -> 'Stream[R]':
         return Stream(func(self._stream))
+
+    def zip_by(self, *iterables: Iterable[Any]) -> 'Stream[(T, *Any)]':
+        return Stream(zip(*iterables, self._stream))
+
+    def zip_with(self, *iterables: Iterable[Any]) -> 'Stream[(T, *Any)]':
+        return Stream(zip(self._stream, *iterables))
+
+    def concat_by(self, iterables: Iterable[T]) -> 'Stream[T]':
+        return Stream(chain(iterables, self._stream))
+
+    def concat_with(self, iterables: Iterable[T]) -> 'Stream[T]':
+        return Stream(chain(self._stream, iterables))

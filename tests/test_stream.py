@@ -82,6 +82,16 @@ class TestStream:
         b = Stream(a).skip(1).to_list()
         assert b == [2, 3]
 
+    def test_take_while(self):
+        a = [1, 4, 6, 4, 1]
+        b = Stream(a).take_while(lambda x: x < 5).to_list()
+        assert b == [1, 4]
+
+    def test_drop_while(self):
+        a = [1, 4, 6, 4, 1]
+        b = Stream(a).drop_while(lambda x: x < 5).to_list()
+        assert b == [6, 4, 1]
+
     def test_min(self):
         a = [{'a': 1}, {'a': 2}]
         b = Stream(a).min(key=lambda x: x['a'])
